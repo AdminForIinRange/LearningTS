@@ -1,5 +1,3 @@
-
-
 let Name = "Josh";
 
 console.log(Name);
@@ -27,8 +25,6 @@ stringOrNumber = 123;
 
 console.log(string, boolean, stringOrNumber);
 
-
-
 let nameArray = ["josh", "mike", "kevin"];
 // nameArray.push(2) not valid, as array is string type
 // nameArray.push("2") Valid as it has string Quotes
@@ -45,33 +41,31 @@ console.log(NewNameArray);
 
 //Array Types
 
-let randomArray : boolean[] 
+let randomArray: boolean[];
 
-randomArray = [true]
+randomArray = [true];
 // randomArray = [true, 1, "true"] //Type 'number' and  'string' is not assignable to type 'boolean'
 
-console.log(randomArray)
+console.log(randomArray);
 
 //OBJECTS
 
+let user = {
+  username: "John",
+  age: 22,
+  isAdmin: false,
+};
 
-let user ={
-    username: "John",
-    age:22,
-    isAdmin:false
-}
-
-user.username = "jane" //   Valid as they are both Types
+user.username = "jane"; //   Valid as they are both Types
 // user.age = "22" // Invalid as they are not the same types
 
-
-console.log(user)
+console.log(user);
 
 let UserObj: {
-    username: string,
-    age: number,
-    isAdmin: boolean
-}
+  username: string;
+  age: number;
+  isAdmin: boolean;
+};
 
 // UserObj ={
 //     username: "John",
@@ -80,27 +74,93 @@ let UserObj: {
 // }
 //'isAdmin' is missing in type '{ username: string; age: number; }' but required in type '{ username: string; age: number; isAdmin: boolean; }
 
-
 let UserObj2: {
-    username: string,
-    age: number,
-    isAdmin: boolean
-    phone?: string // "?" means not required
-}
+  username: string;
+  age: number;
+  isAdmin: boolean;
+  phone?: string; // "?" means not required
+};
 
-UserObj ={
-    username: "John",
-    age:22,
-    isAdmin: false,
-    
-
-}
+UserObj = {
+  username: "John",
+  age: 22,
+  isAdmin: false,
+};
 //ANY
 
 let Any; //Type: let Any: any
 
-Any = "hi"
-Any = 12
-Any = true
-Any = []
-Any = {}
+Any = "hi";
+Any = 12;
+Any = true;
+Any = [];
+Any = {};
+Any = ["hi", 12, true];
+
+//FUNCTION
+
+let sayHi = () => { //The function has no Type, its void
+  console.log("Hi");
+};
+
+// sayHi = ""
+
+
+
+
+let functionReturnString = (): string => { // with : string
+  console.log("hi");
+  return "hi";
+};
+
+let multiple1 = (num: number) => {// without : string, they are the exact same
+  return num * 2;
+};
+
+multiple1(3);
+
+let multiple2 = (num: number): number => {
+  return num * 2;
+};
+
+let multiple3 = (num: number): void =>{ //Type 'number' is not assignable to type 'void'
+    // return num * 2;
+    //Basically it dose the function but dose not return any thing
+}
+
+console.log(multiple1(3));
+console.log(multiple2(3));
+
+let sum = (num1:number, num2:number, another?:number)=>{ //allows 3 prams, the last one can hold serval prams
+    return num1 + num2 // your don't have to or need to add Another or pas sit has a pram, Advice: hover over red underline in text when error occurs, it will displays the error 
+
+}
+console.log(sum(1,2))
+
+
+
+let userConcat = (userProfile: {userName: string, age: number, phone?: string})=> {
+console.log(userProfile.userName)
+
+}
+let userProfile = { userName: "John", age: 30 } // this how you access and pass things to a double prams situation, you may possible come across this situation a lot
+userConcat(userProfile)
+
+
+//Type ALIASES
+
+
+type UserType = {
+    userName: string,
+    age: number,
+    phone?: string
+
+}
+
+let BetterUserConcat = (userProfile2: UserType)=> { //Using Type Aliases makes the code cleaner, basically just Type object, basically just another abstraction, the key goal of TS is Type Safety
+    console.log(userProfile2.userName)
+    
+    }
+    let userProfile2 = { userName: "John", age: 30 }
+    BetterUserConcat(userProfile2)
+    
