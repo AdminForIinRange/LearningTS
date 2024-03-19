@@ -147,7 +147,7 @@ let userProfile = { userName: "John", age: 30 } // this how you access and pass 
 userConcat(userProfile)
 
 
-//Type ALIASES
+//TYPE ALIASES
 
 
 type UserType = {
@@ -164,3 +164,13 @@ let BetterUserConcat = (userProfile2: UserType)=> { //Using Type Aliases makes t
     let userProfile2 = { userName: "John", age: 30 }
     BetterUserConcat(userProfile2)
     
+//Turned a Function into an Aliases, beacus eit has a "type" in front
+type myfucn = (a: number, b:string) => void
+
+const write : myfucn = (num,str) =>{ //this is just num: number, str: string but using undead abstraction, basically  this line is saying a: number, b:string = num,string wihc is just num: number, str:String
+    console.log(num + " times " + str)
+
+
+}
+
+write(5, "hello");
