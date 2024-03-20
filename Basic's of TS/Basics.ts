@@ -1,6 +1,8 @@
 // TypeScript (TS) is actually quite simple. It doesn't change much; it's essentially an advanced auto-corrector. I used to think it was a complex thing I needed to learn, but in reality, it's just a type checker. It's super basic, but I can kind of see the value of TS in team projects. However, on a solo project, I don't fully see the usefulness of TS.
 // Type safety becomes important when your code deals with managing and accessing a large number of data types and variables. However, most small-scale applications don't use a lot of variables or types.
 
+
+// ":"  is how you define types, and always hover over each variable because it displays the error and shows, its type
 let Name = "Josh";
 
 console.log(Name);
@@ -354,7 +356,7 @@ const RankEmp2: TopEmployes2<
 }
 > = {
   emp: [ // remember T was already assigned to be a array and it is called emp, but how we pass an object type and a few data stes, this forced the T wich is alredy in an Array format to hold object and object data
-  
+
     { name: "string", rank: 1 },
     { name: "string", rank: 1 },
     { name: "string", rank: 1 },
