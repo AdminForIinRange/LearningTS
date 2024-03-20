@@ -99,21 +99,21 @@ Any = ["hi", 12, true];
 
 //FUNCTION
 
-let sayHi = () => { //The function has no Type, its void
+let sayHi = () => {
+  //The function has no Type, its void
   console.log("Hi");
 };
 
 // sayHi = ""
 
-
-
-
-let functionReturnString = (): string => { // with : string
+let functionReturnString = (): string => {
+  // with : string
   console.log("hi");
   return "hi";
 };
 
-let multiple1 = (num: number) => {// without : string, they are the exact same
+let multiple1 = (num: number) => {
+  // without : string, they are the exact same
   return num * 2;
 };
 
@@ -123,59 +123,102 @@ let multiple2 = (num: number): number => {
   return num * 2;
 };
 
-let multiple3 = (num: number): void =>{ //Type 'number' is not assignable to type 'void'
-    // return num * 2;
-    //Basically it dose the function but dose not return any thing
-}
+let multiple3 = (num: number): void => {
+  //Type 'number' is not assignable to type 'void'
+  // return num * 2;
+  //Basically it dose the function but dose not return any thing
+};
 
 console.log(multiple1(3));
 console.log(multiple2(3));
 
-let sum = (num1:number, num2:number, another?:number)=>{ //allows 3 prams, the last one can hold serval prams
-    return num1 + num2 // your don't have to or need to add Another or pas sit has a pram, Advice: hover over red underline in text when error occurs, it will displays the error 
+let sum = (num1: number, num2: number, another?: number) => {
+  //allows 3 prams, the last one can hold serval prams
+  return num1 + num2; // your don't have to or need to add Another or pas sit has a pram, Advice: hover over red underline in text when error occurs, it will displays the error
+};
+console.log(sum(1, 2));
 
-}
-console.log(sum(1,2))
-
-
-
-let userConcat = (userProfile: {userName: string, age: number, phone?: string})=> {
-console.log(userProfile.userName)
-
-}
-let userProfile = { userName: "John", age: 30 } // this how you access and pass things to a double prams situation, you may possible come across this situation a lot
-userConcat(userProfile)
-
+let userConcat = (userProfile: {
+  userName: string;
+  age: number;
+  phone?: string;
+}) => {
+  console.log(userProfile.userName);
+};
+let userProfile = { userName: "John", age: 30 }; // this how you access and pass things to a double prams situation, you may possible come across this situation a lot
+userConcat(userProfile);
 
 //TYPE ALIASES
 
-
 type UserType = {
-    userName: string,
-    age: number,
-    phone?: string
+  userName: string;
+  age: number;
+  phone?: string;
+};
 
-}
+let BetterUserConcat = (userProfile2: UserType) => {
+  //Using Type Aliases makes the code cleaner, basically just Type object, basically just another abstraction, the key goal of TS is Type Safety
+  console.log(userProfile2.userName);
+};
+let userProfile2 = { userName: "John", age: 30 };
+BetterUserConcat(userProfile2);
 
-let BetterUserConcat = (userProfile2: UserType)=> { //Using Type Aliases makes the code cleaner, basically just Type object, basically just another abstraction, the key goal of TS is Type Safety
-    console.log(userProfile2.userName)
-    
-    }
-    let userProfile2 = { userName: "John", age: 30 }
-    BetterUserConcat(userProfile2)
-    
 //Turned a Function into an Aliases, beacus eit has a "type" in front
-type myfucn = (a: number, b:string) => void
+type myfucn = (a: number, b: string) => void;
 
-const write : myfucn = (num,str) =>{ //this is just num: number, str: string but using undead abstraction, basically  this line is saying a: number, b:string = num,string wihc is just num: number, str:String
-    console.log(num + " times " + str)
+const write: myfucn = (num, str) => {
+  //this is just num: number, str: string but using undead abstraction, basically  this line is saying a: number, b:string = num,string wihc is just num: number, str:String
+  console.log(num + " times " + str);
+};
+
+write(5, "hello"); // this is how you call the func
+
+// let i : number = 0 //sumthing random
+
+type UserType2 = {
+  username: string;
+  age: number;
+  phone?: string;
+  theme: "dark" | "light";
+};
+
+const userWithTheme: UserType2 = {
+  username: "john",
+  age: 12,
+  theme: "dark", //the type must be "dark" or "light"
+};
+
+
+//INTERFACES
+
+interface IUser {
+
+  username: string,
+  email: string,
+  age: number,
+
 
 
 }
 
-write(5, "hello");
+interface IEmployee extends IUser {
 
+  // employeeId?: number
+    employeeId: number
 
+}
 
-let i : number = 0
+const emp : IEmployee = {
+  username: "tom",
+  age: 13,
+  email: "kjgjdqdw",
+  employeeId: 1
+
+}
+
+const client: IUser = {
+  username: "tom",
+  email: "KBGINTHEPLACETOBE",
+  age:2
+}
 
