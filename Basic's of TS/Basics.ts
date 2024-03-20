@@ -174,3 +174,8 @@ const write : myfucn = (num,str) =>{ //this is just num: number, str: string but
 }
 
 write(5, "hello");
+
+
+
+let i : number = 0
+
