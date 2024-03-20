@@ -1,7 +1,5 @@
-
-
-
-
+// TypeScript (TS) is actually quite simple. It doesn't change much; it's essentially an advanced auto-corrector. I used to think it was a complex thing I needed to learn, but in reality, it's just a type checker. It's super basic, but I can kind of see the value of TS in team projects. However, on a solo project, I don't fully see the usefulness of TS.
+// Type safety becomes important when your code deals with managing and accessing a large number of data types and variables. However, most small-scale applications don't use a lot of variables or types.
 
 let Name = "Josh";
 
@@ -193,71 +191,58 @@ const userWithTheme: UserType2 = {
   theme: "dark", //the type must be "dark" or "light"
 };
 
-
 //INTERFACES
 
 interface IUser {
-
-  username: string,
-  email: string,
-  age: number,
-
-
-
+  username: string;
+  email: string;
+  age: number;
 }
 
 interface IEmployee extends IUser {
-
   // employeeId?: number
-    employeeId: number
-
+  employeeId: number;
 }
 
-const emp : IEmployee = {
+const emp: IEmployee = {
   username: "tom",
   age: 13,
   email: "kjgjdqdw",
-  employeeId: 1
-
-}
+  employeeId: 1,
+};
 
 const client: IUser = {
   username: "tom",
   email: "KBGINTHEPLACETOBE",
-  age:2
-}
-
+  age: 2,
+};
 
 //GENERICS
 
-
 interface IPost {
-  id:number,
-  title: string,
-  desc: string,
-  extra: IAuthor[] | ICategory
-
+  id: number;
+  title: string;
+  desc: string;
+  extra: IAuthor[] | ICategory;
 }
 
-
 interface IPost {
-  id:number,
-  title: string,
-  desc: string,
-  Author: IAuthor[]
-  Category: ICategory
-
+  id: number;
+  title: string;
+  desc: string;
+  Author: IAuthor[];
+  Category: ICategory;
 }
 
-interface IAuthor { // this make more sense
-  id:number, 
-  username: string,
-
+interface IAuthor {
+  // this make more sense
+  id: number;
+  username: string;
 }
 
 interface ICategory {
-  id: number,
-  title: string
+  id: number;
+  title: string;
 }
 
 // Interface defining a post object with a flexible 'extra' property
@@ -266,52 +251,63 @@ interface IPostBetter<T> {
   title: string;
   desc: string;
   extra: T[]; // seems like T is a type of param, just like how you would pass data to a function, but in this case you're passing it to extra: ____ GTP says I'm correct :)
-// and in this case T is allowed to be an array because it has [] next to it
+  // and in this case T is allowed to be an array because it has [] next to it
 }
 
-const testme: IPostBetter<string> = {  //testme is Parent Const and by doing ":" we change the type of the function to IPostBetter and that <T> we allow the type to be <string>
+const testme: IPostBetter<string> = {
+  //testme is Parent Const and by doing ":" we change the type of the function to IPostBetter and that <T> we allow the type to be <string>
   //then we pass in the obj values, that follows testme which is type is being managed and checked by IPostBetter because of ":"
   id: 1,
   title: "222",
   desc: "sss",
-  extra: ["str", "str2"] // we can see that Extra is being filled, and it's an array as it's allowed to be, because the interface allows T to be an array because it has [] next to it. When I remove it, it shows this on hover: Type 'string[]' is missing the following properties from type
+  extra: ["str", "str2"], // we can see that Extra is being filled, and it's an array as it's allowed to be, because the interface allows T to be an array because it has [] next to it. When I remove it, it shows this on hover: Type 'string[]' is missing the following properties from type
 };
 
 console.log(testme);
 
-interface IPostEvenBetter<T extends object> { //Rember think of t and a prams in a fuction, now we extend that, and allow that T to be a Object 
+interface IPostEvenBetter<T extends object> {
+  //Rember think of t and a prams in a fuction, now we extend that, and allow that T to be a Object
   id: number;
   title: string;
   desc: string;
   extra: T[]; //dont forget T is an array to, so thsi means what ever is passed into T will be an Array object
 }
 
-const testme2: IPostEvenBetter<{id: number, username:string }> = {  //ok so here IPostEvenBetter is type cheaking testme2, "testme : <Interface type>, we can see that T from the "T extend object" is applying types 
+const testme2: IPostEvenBetter<{ id: number; username: string }> = {
+  //ok so here IPostEvenBetter is type cheaking testme2, "testme : <Interface type>, we can see that T from the "T extend object" is applying types
 
-  
   id: 1,
   title: "222",
   desc: "sss",
-  extra: [{id:1, username:"jhon"}] 
-}
+  extra: [{ id: 1, username: "jhon" }],
+};
 
-interface IPostTest2<T extends object> { 
+interface IPostTest2<T extends object> {
   id: number;
   title: string;
   desc: string;
-  extra: T[]; 
+  extra: T[];
 }
-interface IAuthor2 { 
-  id:number, 
-  username: string,
-
+interface IAuthor2 {
+  id: number;
+  username: string;
 }
 
-const testme3: IPostTest2<IAuthor2> = { //so i am able to use Authors interface as generics to cheak my <T> object types 
+const testme3: IPostTest2<IAuthor2> = {
+  //so i am able to use Authors interface as generics to cheak my <T> object types
 
-  
   id: 1,
   title: "222",
   desc: "sss",
-  extra: [{id:1, username:"jhon"}] 
-}
+  extra: [{ id: 1, username: "jhon" }],
+};
+
+
+const testme4: IPostTest2<ICategory> = {
+  //so i am able to use Authors interface as generics to cheak my <T> object types
+
+  id: 1,
+  title: "222",
+  desc: "sss",
+  extra: [{ id: 1, title: "cat" }],
+};
