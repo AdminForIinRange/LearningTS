@@ -311,3 +311,41 @@ const testme4: IPostTest2<ICategory> = {
   desc: "sss",
   extra: [{ id: 1, title: "cat" }],
 };
+
+
+
+
+
+interface ProgramingRank <T>{
+  JS: {rank: number, desc: string},
+  TS: {rank: number, desc: string},
+  C: {rank: number, desc: string}
+  extra: T[]
+
+
+}
+
+const Programing : ProgramingRank<string> = {
+  JS: {rank: 1, desc: "string"},
+  TS: {rank: 1, desc: "string"},
+  C: {rank: 1, desc: "string"},
+  extra: ["w"]
+}
+
+interface TopEmployes <T extends object>{
+  emp: {name: string, rank: number,},
+  emp2: {name: string, rank: number},
+  emp3: {name: string, rank: number}
+  extra: T
+  
+}
+
+const RankEmp : TopEmployes<{emp3:{name: string, rank: number, id?: number} }> = {
+  emp: {name: "string", rank: 1,},
+  emp2: {name: "string", rank: 1},
+  emp3: {name: "string", rank: 1},
+  extra: {emp3:{name: "string", rank: 1, id:1}}
+  
+}
+
+console.log(RankEmp)
