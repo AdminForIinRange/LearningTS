@@ -302,7 +302,6 @@ const testme3: IPostTest2<IAuthor2> = {
   extra: [{ id: 1, username: "jhon" }],
 };
 
-
 const testme4: IPostTest2<ICategory> = {
   //so i am able to use Authors interface as generics to cheak my <T> object types
 
@@ -312,40 +311,54 @@ const testme4: IPostTest2<ICategory> = {
   extra: [{ id: 1, title: "cat" }],
 };
 
-
-
-
-
-interface ProgramingRank <T>{
-  JS: {rank: number, desc: string},
-  TS: {rank: number, desc: string},
-  C: {rank: number, desc: string}
-  extra: T[]
-
-
+interface ProgramingRank<T> {
+  JS: { rank: number; desc: string };
+  TS: { rank: number; desc: string };
+  C: { rank: number; desc: string };
+  extra: T[];
 }
 
-const Programing : ProgramingRank<string> = {
-  JS: {rank: 1, desc: "string"},
-  TS: {rank: 1, desc: "string"},
-  C: {rank: 1, desc: "string"},
-  extra: ["w"]
+const Programing: ProgramingRank<string> = {
+  JS: { rank: 1, desc: "string" },
+  TS: { rank: 1, desc: "string" },
+  C: { rank: 1, desc: "string" },
+  extra: ["w"],
+};
+
+interface TopEmployes<T extends object> {
+  emp: { name: string; rank: number };
+  emp2: { name: string; rank: number };
+  emp3: { name: string; rank: number };
+  extra: T;
 }
 
-interface TopEmployes <T extends object>{
-  emp: {name: string, rank: number,},
-  emp2: {name: string, rank: number},
-  emp3: {name: string, rank: number}
-  extra: T
+const RankEmp: TopEmployes<{
+  emp3: { name: string; rank: number; id?: number };
+}> = {
+  emp: { name: "string", rank: 1 },
+  emp2: { name: "string", rank: 1 },
+  emp3: { name: "string", rank: 1 },
+  extra: { emp3: { name: "string", rank: 1, id: 1 } },
+};
+
+interface TopEmployes2<T extends object> {
+  emp: T[];
+}
+
+const RankEmp2: TopEmployes2<
+{ // oh so we allow T to hold objects inside
+  name: string;
+  rank: number;
+  id?: number;
   
 }
-
-const RankEmp : TopEmployes<{emp3:{name: string, rank: number, id?: number} }> = {
-  emp: {name: "string", rank: 1,},
-  emp2: {name: "string", rank: 1},
-  emp3: {name: "string", rank: 1},
-  extra: {emp3:{name: "string", rank: 1, id:1}}
+> = {
+  emp: [ // remember T was already assigned to be a array and it is called emp, but how we pass an object type and a few data stes, this forced the T wich is alredy in an Array format to hold object and object data
   
-}
+    { name: "string", rank: 1 },
+    { name: "string", rank: 1 },
+    { name: "string", rank: 1 },
+  ],
+};
 
-console.log(RankEmp)
+console.log(RankEmp2);
