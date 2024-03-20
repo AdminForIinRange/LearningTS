@@ -1,3 +1,8 @@
+
+
+
+
+
 let Name = "Josh";
 
 console.log(Name);
@@ -88,7 +93,7 @@ UserObj = {
 };
 //ANY
 
-let Any; //Type: let Any: any
+let Any; //Type: let Any: any //hover over Any
 
 Any = "hi";
 Any = 12;
@@ -222,3 +227,91 @@ const client: IUser = {
   age:2
 }
 
+
+//GENERICS
+
+
+interface IPost {
+  id:number,
+  title: string,
+  desc: string,
+  extra: IAuthor[] | ICategory
+
+}
+
+
+interface IPost {
+  id:number,
+  title: string,
+  desc: string,
+  Author: IAuthor[]
+  Category: ICategory
+
+}
+
+interface IAuthor { // this make more sense
+  id:number, 
+  username: string,
+
+}
+
+interface ICategory {
+  id: number,
+  title: string
+}
+
+// Interface defining a post object with a flexible 'extra' property
+interface IPostBetter<T> {
+  id: number;
+  title: string;
+  desc: string;
+  extra: T[]; // seems like T is a type of param, just like how you would pass data to a function, but in this case you're passing it to extra: ____ GTP says I'm correct :)
+// and in this case T is allowed to be an array because it has [] next to it
+}
+
+const testme: IPostBetter<string> = {  //testme is Parent Const and by doing ":" we change the type of the function to IPostBetter and that <T> we allow the type to be <string>
+  //then we pass in the obj values, that follows testme which is type is being managed and checked by IPostBetter because of ":"
+  id: 1,
+  title: "222",
+  desc: "sss",
+  extra: ["str", "str2"] // we can see that Extra is being filled, and it's an array as it's allowed to be, because the interface allows T to be an array because it has [] next to it. When I remove it, it shows this on hover: Type 'string[]' is missing the following properties from type
+};
+
+console.log(testme);
+
+interface IPostEvenBetter<T extends object> { //Rember think of t and a prams in a fuction, now we extend that, and allow that T to be a Object 
+  id: number;
+  title: string;
+  desc: string;
+  extra: T[]; //dont forget T is an array to, so thsi means what ever is passed into T will be an Array object
+}
+
+const testme2: IPostEvenBetter<{id: number, username:string }> = {  //ok so here IPostEvenBetter is type cheaking testme2, "testme : <Interface type>, we can see that T from the "T extend object" is applying types 
+
+  
+  id: 1,
+  title: "222",
+  desc: "sss",
+  extra: [{id:1, username:"jhon"}] 
+}
+
+interface IPostTest2<T extends object> { 
+  id: number;
+  title: string;
+  desc: string;
+  extra: T[]; 
+}
+interface IAuthor2 { 
+  id:number, 
+  username: string,
+
+}
+
+const testme3: IPostTest2<IAuthor2> = { //so i am able to use Authors interface as generics to cheak my <T> object types 
+
+  
+  id: 1,
+  title: "222",
+  desc: "sss",
+  extra: [{id:1, username:"jhon"}] 
+}
